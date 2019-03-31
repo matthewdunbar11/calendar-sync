@@ -1,0 +1,31 @@
+doctype html
+html
+  head
+    title Multisite
+    = csrf_meta_tags
+    = csp_meta_tag
+
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = stylesheet_link_tag    '//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+
+  body
+    nav.navigation
+      .container
+        .logo.navigation__item
+          = link_to root_path do
+            h4 Calendar Sync
+        .navigation__item= link_to 'Home', root_path
+        - if current_user
+          .navigation__item.get-started= link_to "Hello, #{current_user.email}", account_path
+        - else
+          .navigation__item.get-started= link_to 'Get Started', new_user_registration_path, class: 'button'
+
+    .container
+      .row
+        - flash.each do |key, value|
+          = content_tag :div, value, class: "flash #{key}"
+
+      .row
+        .column.column-60.column-offset-20
+          = yield
