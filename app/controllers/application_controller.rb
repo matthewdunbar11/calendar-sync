@@ -3,6 +3,6 @@ class ApplicationController < ActionController::Base
   protected
 
   def after_sign_in_path_for(resource)
-    account_path
+    calendars_path
   end
 end

@@ -1,0 +1,14 @@
+h1 Calendars
+
+table
+  thead
+    tr
+      th Name
+      th  
+  tbody
+    - @calendars.each do |calendar|
+      tr data-id=calendar.id
+        td= calendar.name
+        td= link_to 'View', calendar_path(calendar), class: 'float-right'
+
+= link_to 'New', new_calendar_path, class: 'button'
