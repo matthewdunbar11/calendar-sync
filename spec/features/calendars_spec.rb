@@ -35,10 +35,25 @@ RSpec.feature 'calendars' do
 
     sign_in calendar.user
     
-    visit edit_calendar_path(calendar)
+    visit calendars_path
+    find("[data-id='#{calendar.id}']").click_on 'View'
+    click_on 'Edit'
     fill_in 'Name', with: 'A New Calendar Name'
     click_on 'Update Calendar'
     expect(page).to have_content('Calendar successfully updated')
     expect(page).to have_content('A New Calendar Name')
+  end
+
+  scenario 'deleting a calendar' do
+    calendar = FactoryBot.create(:calendar)
+
+    sign_in calendar.user
+
+    visit calendars_path
+    find("[data-id='#{calendar.id}']").click_on 'View'
+    click_on 'Delete'
+    expect(current_path).to eq(calendars_path)
+    expect(page).to have_content('Calendar successfully deleted')
+    expect(page).not_to have_selector("[data-id='#{calendar.id}']")
   end
 end

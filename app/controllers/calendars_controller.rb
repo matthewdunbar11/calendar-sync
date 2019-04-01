@@ -38,6 +38,18 @@ class CalendarsController < ApplicationController
     end
   end
 
+  def destroy
+    @calendar = Calendar.find_by!(id: params[:id], user: current_user)
+
+    if @calendar.destroy
+      flash[:notice] = 'Calendar successfully deleted'
+      redirect_to calendars_path
+    else
+      flash[:error] = @calendar.errors.full_messages.to_sentence
+      redirect_to @calendar
+    end
+  end
+
   private
 
   def calendar_params
