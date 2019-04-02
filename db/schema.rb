@@ -22,7 +22,8 @@ ActiveRecord::Schema.define(version: 2019_04_02_103428) do
 
   create_table "events", force: :cascade do |t|
     t.string "name"
-    t.datetime "datetime"
+    t.datetime "start_datetime"
+    t.datetime "end_datetime"
     t.integer "calendar_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

@@ -1,5 +1,5 @@
 class Event < ApplicationRecord
   belongs_to :calendar
 
-  validates :name, :datetime, presence: true
+  validates :name, :start_datetime, :end_datetime, presence: true
 end

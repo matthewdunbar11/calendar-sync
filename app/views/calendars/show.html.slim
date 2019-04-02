@@ -13,7 +13,7 @@ table
     - @calendar.events.each do |event|
       tr data-id=event.id
         td= event.name
-        td= event.datetime
+        td= event.start_datetime
         td
           = link_to 'Edit', [:edit, event]
           |  | 

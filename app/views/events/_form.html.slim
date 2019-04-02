@@ -4,7 +4,8 @@
     = f.text_field :name
 
     = f.label :datetime, 'Date'
-    = f.datetime_select :datetime, ampm: true
+    = f.datetime_select :start_datetime, ampm: true
+    = f.datetime_select :end_datetime, ampm: true
 
     br
 
