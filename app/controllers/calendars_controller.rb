@@ -21,6 +21,13 @@ class CalendarsController < ApplicationController
 
   def show
     @calendar = Calendar.find(params[:id])
+
+    respond_to do |format|
+      format.html
+      format.ics do 
+        calendar_to_webcal(@calendar)
+      end
+    end
   end
 
   def edit
@@ -54,5 +61,22 @@ class CalendarsController < ApplicationController
 
   def calendar_params
     params.require(:calendar).permit(:name)
+  end
+
+  def calendar_to_webcal(calendar)
+    cal = Icalendar::Calendar.new
+    cal.x_wr_calname = @calendar.name
+    
+    calendar.events.each do |event|
+      cal.event do |e|
+        e.dtstart     = event.start_datetime
+        e.dtend       = event.end_datetime
+        e.summary     = event.name
+      end
+    end
+    
+    cal.publish
+
+    render plain: cal.to_ical
   end
 end

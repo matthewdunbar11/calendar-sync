@@ -21,6 +21,22 @@ RSpec.feature 'events' do
     expect(page).not_to have_selector("[data-id='#{other_event.id}']")
   end
 
+  scenario 'webcal list of events' do
+    other_calendar = FactoryBot.create(:calendar)
+
+    event1 = FactoryBot.create(:event, name: 'Event 1', calendar: calendar)
+    event2 = FactoryBot.create(:event, name: 'Event 2', calendar: calendar)
+    other_event = FactoryBot.create(:event, name: 'Other Event', calendar: other_calendar)
+    
+    visit calendar_path(calendar)
+    click_on 'Mobile Subscribe'
+    
+    expect(page).to have_content('BEGIN:VCALENDAR')
+    expect(page).to have_content(event1.name)
+    expect(page).to have_content(event2.name)
+    expect(page).not_to have_content(other_event.name)
+  end
+
   scenario 'creating an event' do
     visit calendar_path(calendar)
     click_on 'Add New Event'
