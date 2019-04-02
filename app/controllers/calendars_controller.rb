@@ -21,7 +21,8 @@ class CalendarsController < ApplicationController
 
   def show
     @calendar = Calendar.find(params[:id])
-
+    @calendar_webcal_url = calendar_url(@calendar, protocol: 'webcal', format: 'ics')
+    @google_url = "https://www.google.com/calendar/r?cid=#{@calendar_webcal_url}"
     respond_to do |format|
       format.html
       format.ics do 
