@@ -2,3 +2,19 @@ h1= @calendar.name
 .actions
   = link_to 'Edit', edit_calendar_path(@calendar), class: 'button'
   = link_to 'Delete', calendar_path, method: :delete, data: { confirm: 'Are you sure you want to delete this calendar? This action is PERMANENT and cannot be undone.' }, class: 'button danger'
+  = link_to 'Add New Event', new_calendar_event_path(@calendar), class: 'button'
+table
+  thead
+    tr
+      th Name
+      th Date
+      th Actions
+  tbody
+    - @calendar.events.each do |event|
+      tr data-id=event.id
+        td= event.name
+        td= event.datetime
+        td
+          = link_to 'Edit', [:edit, event]
+          |  | 
+          = link_to 'Delete', event, method: :delete, data: { confirm: 'Are you sure you want to delete this event?' }

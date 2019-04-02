@@ -1,0 +1,11 @@
+.event-form
+  = form_with model: [@calendar, @event], local: true do |f|
+    = f.label :name
+    = f.text_field :name
+
+    = f.label :datetime, 'Date'
+    = f.datetime_select :datetime, ampm: true
+
+    br
+
+    = f.submit
