@@ -29,7 +29,7 @@ RSpec.feature 'events' do
     other_event = FactoryBot.create(:event, name: 'Other Event', calendar: other_calendar)
     
     visit calendar_path(calendar)
-    click_on 'Mobile Subscribe'
+    click_on 'Add to iPhone Calendar'
     
     expect(page).to have_content('BEGIN:VCALENDAR')
     expect(page).to have_content(event1.name)
