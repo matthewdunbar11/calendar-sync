@@ -16,6 +16,7 @@ gem 'devise'
 gem 'font-awesome-sass', '~> 5.8.1'
 gem 'icalendar'
 gem 'slim-rails'
+gem 'webpacker', '~> 4.x'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
