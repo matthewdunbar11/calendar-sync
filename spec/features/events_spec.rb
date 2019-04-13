@@ -44,8 +44,8 @@ RSpec.feature 'events' do
     event_attributes = FactoryBot.attributes_for(:event)
     fill_in 'Name', with: event_attributes[:name]
 
-    select_date_and_time(event_attributes[:start_datetime], from: 'event_start_datetime')
-    select_date_and_time(event_attributes[:end_datetime], from: 'event_end_datetime')
+    fill_in 'Start Date', with: event_attributes[:start_datetime]
+    fill_in 'End Date', with: event_attributes[:end_datetime]
 
     click_on 'Create Event'
     expect(page).to have_content('Event successfully created')
