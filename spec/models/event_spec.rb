@@ -2,24 +2,24 @@ require 'rails_helper'
 
 RSpec.describe Event, type: :model do
   describe 'model validations' do
-    it 'requires a start_datetime' do
-      event = FactoryBot.build(:event, start_datetime: nil)
+    it 'requires a start' do
+      event = FactoryBot.build(:event, start: nil)
       expect(event).not_to be_valid
-      event.start_datetime = DateTime.new
+      event.start = DateTime.new
       expect(event).to be_valid
     end
 
-    it 'requires an end_datetime' do
-      event = FactoryBot.build(:event, end_datetime: nil)
+    it 'requires an end' do
+      event = FactoryBot.build(:event, end: nil)
       expect(event).not_to be_valid
-      event.end_datetime = DateTime.new
+      event.end = DateTime.new
       expect(event).to be_valid
     end
 
-    it 'requires a name' do
-      event = FactoryBot.build(:event, name: nil)
+    it 'requires a title' do
+      event = FactoryBot.build(:event, title: nil)
       expect(event).not_to be_valid
-      event.name = 'Test'
+      event.title = 'Test'
       expect(event).to be_valid
     end
   end

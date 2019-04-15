@@ -70,9 +70,9 @@ class CalendarsController < ApplicationController
     
     calendar.events.each do |event|
       cal.event do |e|
-        e.dtstart     = event.start_datetime
-        e.dtend       = event.end_datetime
-        e.summary     = event.name
+        e.dtstart     = event.start
+        e.dtend       = event.end
+        e.summary     = event.title
       end
     end
     

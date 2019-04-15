@@ -1,4 +1,12 @@
 class EventsController < ApplicationController
+  def index
+    @calendar = Calendar.find_by!(id: params[:calendar_id])
+    @events = @calendar.events
+    respond_to do |format|
+      format.json { render json: @events }
+    end    
+  end
+
   def new
     @calendar = Calendar.find_by!(id: params[:calendar_id], user: current_user)
     @event = Event.new(calendar: @calendar)
@@ -16,6 +24,10 @@ class EventsController < ApplicationController
       flash[:error] = @event.errors.full_messages.to_sentence
       render :new
     end
+  end
+
+  def show
+    @event = Event.find(params[:id])
   end
 
   def edit
@@ -48,6 +60,6 @@ class EventsController < ApplicationController
   private
 
   def event_params
-    params.require(:event).permit(:name, :start_datetime, :end_datetime)
+    params.require(:event).permit(:title, :start, :end)
   end
 end

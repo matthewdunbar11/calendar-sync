@@ -56,4 +56,18 @@ RSpec.feature 'calendars' do
     expect(page).to have_content('Calendar successfully deleted')
     expect(page).not_to have_selector("[data-id='#{calendar.id}']")
   end
+
+  scenario 'view javascript calendar', js: true do
+    event = FactoryBot.create(:event)
+
+    sign_in event.calendar.user
+
+    visit calendar_path(event.calendar)
+    expect(page).to have_selector('.fc')
+    expect(page).to have_content(event.title)
+    click_on event.title
+    expect(page).to have_content(event.title)
+    click_on 'Edit'
+    expect(current_path).to eq(edit_event_path(event))
+  end
 end

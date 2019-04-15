@@ -24,17 +24,17 @@ RSpec.feature 'events' do
   scenario 'webcal list of events' do
     other_calendar = FactoryBot.create(:calendar)
 
-    event1 = FactoryBot.create(:event, name: 'Event 1', calendar: calendar)
-    event2 = FactoryBot.create(:event, name: 'Event 2', calendar: calendar)
-    other_event = FactoryBot.create(:event, name: 'Other Event', calendar: other_calendar)
+    event1 = FactoryBot.create(:event, title: 'Event 1', calendar: calendar)
+    event2 = FactoryBot.create(:event, title: 'Event 2', calendar: calendar)
+    other_event = FactoryBot.create(:event, title: 'Other Event', calendar: other_calendar)
     
     visit calendar_path(calendar)
     click_on 'Add to iPhone Calendar'
     
     expect(page).to have_content('BEGIN:VCALENDAR')
-    expect(page).to have_content(event1.name)
-    expect(page).to have_content(event2.name)
-    expect(page).not_to have_content(other_event.name)
+    expect(page).to have_content(event1.title)
+    expect(page).to have_content(event2.title)
+    expect(page).not_to have_content(other_event.title)
   end
 
   scenario 'creating an event' do
@@ -42,25 +42,25 @@ RSpec.feature 'events' do
     click_on 'Add New Event'
 
     event_attributes = FactoryBot.attributes_for(:event)
-    fill_in 'Name', with: event_attributes[:name]
+    fill_in 'Title', with: event_attributes[:title]
 
-    fill_in 'Start Date', with: event_attributes[:start_datetime]
-    fill_in 'End Date', with: event_attributes[:end_datetime]
+    fill_in 'Start Date', with: event_attributes[:start]
+    fill_in 'End Date', with: event_attributes[:end]
 
     click_on 'Create Event'
     expect(page).to have_content('Event successfully created')
-    expect(page).to have_content(event_attributes[:name])
+    expect(page).to have_content(event_attributes[:title])
   end
 
   scenario 'editing an event' do
     event = FactoryBot.create(:event, calendar: calendar)
     visit calendar_path(calendar)
     find("[data-id='#{event.id}']").click_on 'Edit'
-    fill_in 'Name', with: 'A New name'
+    fill_in 'Title', with: 'A New title'
     click_on 'Update Event'
 
     expect(page).to have_content('Event successfully updated')
-    expect(page).to have_content('A New name')
+    expect(page).to have_content('A New title')
   end
 
   scenario 'deleting an event' do

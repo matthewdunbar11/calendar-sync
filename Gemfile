@@ -12,6 +12,7 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 gem 'bootsnap', '>= 1.1.0', require: false
 
+gem 'active_model_serializers'
 gem 'devise'
 gem 'font-awesome-sass', '~> 5.8.1'
 gem 'icalendar'

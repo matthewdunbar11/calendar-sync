@@ -1,13 +1,13 @@
 .event-form
   = form_with model: [@calendar, @event], local: true do |f|
-    = f.label :name
-    = f.text_field :name
+    = f.label :title
+    = f.text_field :title
 
-    = f.label :start_datetime, 'Start Date'
-    = f.datetime_field :start_datetime, ampm: true
+    = f.label :start, 'Start Date'
+    = f.datetime_field :start, ampm: true
 
-    = f.label :end_datetime, 'End Date'
-    = f.datetime_field :end_datetime, ampm: true
+    = f.label :end, 'End Date'
+    = f.datetime_field :end, ampm: true
     br
 
     = f.submit
