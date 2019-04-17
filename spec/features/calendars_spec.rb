@@ -70,4 +70,14 @@ RSpec.feature 'calendars' do
     click_on 'Edit'
     expect(current_path).to eq(edit_event_path(event))
   end
+
+  scenario 'view javascript calendar in presentation mode', js: true do
+    event = FactoryBot.create(:event)
+
+    sign_in event.calendar.user
+
+    visit present_calendar_path(event.calendar)
+    expect(page).to have_selector('.fc')
+    expect(page).not_to have_content('Home')
+  end
 end

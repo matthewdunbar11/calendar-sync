@@ -1,4 +1,6 @@
 class CalendarsController < ApplicationController
+  layout 'navless', only: :present
+
   def new
     @calendar = Calendar.new
   end
@@ -29,6 +31,13 @@ class CalendarsController < ApplicationController
         calendar_to_webcal(@calendar)
       end
     end
+  end
+
+  def present
+    @calendar = Calendar.find(params[:id])
+    @calendar_webcal_url = calendar_url(@calendar, protocol: 'webcal', format: 'ics')
+    @google_url = "https://www.google.com/calendar/r?cid=#{@calendar_webcal_url}"
+    render :show
   end
 
   def edit

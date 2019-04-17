@@ -1,0 +1,12 @@
+nav.navigation
+  .container
+    .logo.navigation__item
+      = link_to root_path do
+        h4 Calendar Sync
+      
+    .navigation__item= link_to 'Home', root_path
+    - if current_user
+      .navigation__item= link_to 'View My Calendars', calendars_path
+      .navigation__item.get-started= link_to "Hello, #{current_user.email}", calendars_path
+    - else
+      .navigation__item.get-started= link_to 'Get Started', new_user_registration_path, class: 'button'

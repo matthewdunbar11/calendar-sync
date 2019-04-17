@@ -4,6 +4,10 @@ Rails.application.routes.draw do
 
   resources :calendars do
     resources :events, shallow: true
+
+    member do
+      get :present
+    end
   end
 
   get '/account', to: 'users#account', as: :account

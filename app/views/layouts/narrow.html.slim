@@ -1,4 +1,10 @@
 = render 'layouts/base' do
-  .row
-    .column.column-60.column-offset-20
-      = yield
+  = render 'layouts/navigation'
+  .container
+    .row
+      - flash.each do |key, value|
+        = content_tag :div, value, class: "flash #{key}"
+
+    .row
+      .column.column-60.column-offset-20
+        = yield
