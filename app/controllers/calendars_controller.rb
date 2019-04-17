@@ -1,13 +1,8 @@
 class CalendarsController < ApplicationController
+  load_and_authorize_resource
   layout 'navless', only: :present
 
-  def new
-    @calendar = Calendar.new
-  end
-
   def create
-    @calendar = Calendar.new(calendar_params)
-    @calendar.user = current_user
     if @calendar.save
       flash[:notice] = 'Calendar successfully created'
       redirect_to @calendar
@@ -17,12 +12,7 @@ class CalendarsController < ApplicationController
     end
   end
 
-  def index
-    @calendars = Calendar.where(user: current_user)
-  end
-
   def show
-    @calendar = Calendar.find(params[:id])
     @calendar_webcal_url = calendar_url(@calendar, protocol: 'webcal', format: 'ics')
     @google_url = "https://www.google.com/calendar/r?cid=#{@calendar_webcal_url}"
     respond_to do |format|
@@ -40,12 +30,7 @@ class CalendarsController < ApplicationController
     render :show
   end
 
-  def edit
-    @calendar = Calendar.find_by!(id: params[:id], user: current_user)
-  end
-
   def update
-    @calendar = Calendar.find_by!(id: params[:id], user: current_user)
     if @calendar.update(calendar_params)
       flash[:notice] = 'Calendar successfully updated'
       redirect_to @calendar
@@ -56,8 +41,6 @@ class CalendarsController < ApplicationController
   end
 
   def destroy
-    @calendar = Calendar.find_by!(id: params[:id], user: current_user)
-
     if @calendar.destroy
       flash[:notice] = 'Calendar successfully deleted'
       redirect_to calendars_path

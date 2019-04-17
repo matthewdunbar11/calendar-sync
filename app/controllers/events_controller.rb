@@ -1,22 +1,14 @@
 class EventsController < ApplicationController
+  load_and_authorize_resource :calendar
+  load_and_authorize_resource :event, through: :calendar, shallow: true
+
   def index
-    @calendar = Calendar.find_by!(id: params[:calendar_id])
-    @events = @calendar.events
     respond_to do |format|
       format.json { render json: @events }
     end    
   end
 
-  def new
-    @calendar = Calendar.find_by!(id: params[:calendar_id], user: current_user)
-    @event = Event.new(calendar: @calendar)
-  end
-
   def create
-    @calendar = Calendar.find_by!(id: params[:calendar_id], user: current_user)
-    @event = Event.new(event_params)
-    @event.calendar = @calendar
-    
     if @event.save
       flash[:notice] = 'Event successfully created'
       redirect_to @calendar
@@ -26,16 +18,7 @@ class EventsController < ApplicationController
     end
   end
 
-  def show
-    @event = Event.find(params[:id])
-  end
-
-  def edit
-    @event = Event.includes(:calendar).find_by!(id: params[:id], calendars: { user: current_user })
-  end
-
   def update
-    @event = Event.includes(:calendar).find_by!(id: params[:id], calendars: { user: current_user })
     if @event.update(event_params)
       flash[:notice] = 'Event successfully updated'
       redirect_to @event.calendar
@@ -46,8 +29,6 @@ class EventsController < ApplicationController
   end
 
   def destroy
-    @event = Event.includes(:calendar).find_by!(id: params[:id], calendars: { user: current_user })
-
     if @event.destroy
       flash[:notice] = 'Event successfully deleted'
       redirect_to calendar_url(@event.calendar)
