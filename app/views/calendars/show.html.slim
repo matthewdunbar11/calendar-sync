@@ -26,7 +26,7 @@ br
     tbody
       - @calendar.events.each do |event|
         tr data-id=event.id
-          td= event.title
+          td= link_to event.title, event
           td= event.start
           td
             = link_to [:edit, event], class: 'button button-xsmall record__action-link' do

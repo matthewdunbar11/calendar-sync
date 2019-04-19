@@ -14,7 +14,7 @@ export default class extends Controller {
       plugins: [ dayGridPlugin ],
       customButtons: {
         addNewEvent: {
-          text: '+ New Event',
+          text: 'Add New Event',
           click: function() {
             window.location.assign(newEventPath);
           }

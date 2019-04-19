@@ -1,7 +1,0 @@
-h1
-  = @event.title
-  - if current_user
-    = link_to edit_event_path(@event), class: 'button button-small title__action-link' do
-      = icon('fas', 'edit', 'Edit')
-    = link_to event_path, method: :delete, data: { confirm: 'Are you sure you want to delete this event? This action is PERMANENT and cannot be undone.' }, class: 'button button-small danger title__action-link' do
-      = icon('fas', 'trash', 'Delete')      

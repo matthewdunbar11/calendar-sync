@@ -37,7 +37,7 @@ RSpec.feature 'events' do
     expect(page).not_to have_content(other_event.title)
   end
 
-  scenario 'creating an event' do
+  fscenario 'creating an event' do
     visit calendar_path(calendar)
     click_on 'Add New Event'
 
@@ -47,9 +47,13 @@ RSpec.feature 'events' do
     fill_in 'Start Date', with: event_attributes[:start]
     fill_in 'End Date', with: event_attributes[:end]
 
+    find('[name="event[description]"]', visible: false).set(event_attributes[:description])
+    # fill_in 'event[description]', with: event_attributes[:description]
+
     click_on 'Create Event'
     expect(page).to have_content('Event successfully created')
-    expect(page).to have_content(event_attributes[:title])
+    click_on event_attributes[:title]
+    expect(page.html).to include(event_attributes[:description])
   end
 
   scenario 'editing an event' do

@@ -17,3 +17,6 @@
 
 import '../flatpickr-wrapper';
 import "controllers"
+
+import 'trix';
+import '@rails/actiontext';

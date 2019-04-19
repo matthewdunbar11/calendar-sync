@@ -3,11 +3,18 @@
     = f.label :title
     = f.text_field :title
 
-    = f.label :start, 'Start Date'
-    = f.datetime_field :start, ampm: true
+    .row
+      .column.column-50
+        = f.label :start, 'Start Date'
+        = f.datetime_field :start, ampm: true
+      .column.column-50
+        = f.label :end, 'End Date'
+        = f.datetime_field :end, ampm: true
 
-    = f.label :end, 'End Date'
-    = f.datetime_field :end, ampm: true
+    .row
+      .column
+        = f.label :description
+        = f.rich_text_area :description
+
     br
-
     = f.submit
