@@ -2,6 +2,10 @@ class CalendarsController < ApplicationController
   load_and_authorize_resource
   layout 'navless', only: :present
 
+  def index
+    @calendars = Calendar.accessible_by(current_ability, :manage)
+  end
+
   def create
     if @calendar.save
       flash[:notice] = 'Calendar successfully created'

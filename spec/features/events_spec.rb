@@ -37,7 +37,7 @@ RSpec.feature 'events' do
     expect(page).not_to have_content(other_event.title)
   end
 
-  fscenario 'creating an event' do
+  scenario 'creating an event' do
     visit calendar_path(calendar)
     click_on 'Add New Event'
 
@@ -76,13 +76,10 @@ RSpec.feature 'events' do
     expect(page).to have_content('Event successfully deleted')
     expect(page).not_to have_selector("[data-id='#{event.id}']")
   end
-end
 
-def select_date_and_time(date, options = {})
-  field = options[:from]
-  select date.strftime('%Y'),    from: "#{field}_1i" #year
-  select date.strftime('%B'),    from: "#{field}_2i" #month
-  select date.strftime('%-d'),   from: "#{field}_3i" #day 
-  select date.strftime('%I %p'), from: "#{field}_4i" #hour
-  select date.strftime('%M'),    from: "#{field}_5i" #minute
+  scenario 'anonymously view an event' do
+    event = FactoryBot.create(:event)
+    visit event_path(event)
+    expect(page).to have_content(event.title)
+  end
 end
