@@ -21,6 +21,7 @@ gem 'devise'
 gem 'font-awesome-sass', '~> 5.8.1'
 gem 'icalendar'
 gem 'jquery-rails'
+gem 'rails_admin', github: 'sferik/rails_admin'
 gem 'slim-rails'
 gem 'webpacker', '~> 4.x'
 
