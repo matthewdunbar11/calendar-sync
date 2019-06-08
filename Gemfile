@@ -14,10 +14,13 @@ gem 'bootsnap', '>= 1.1.0', require: false
 
 gem 'actiontext'
 gem 'active_model_serializers'
+gem 'bootstrap'
+gem 'bootstrap_form'
 gem 'cancancan'
 gem 'devise'
 gem 'font-awesome-sass', '~> 5.8.1'
 gem 'icalendar'
+gem 'jquery-rails'
 gem 'slim-rails'
 gem 'webpacker', '~> 4.x'
 
