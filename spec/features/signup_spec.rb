@@ -8,7 +8,6 @@ RSpec.feature 'signup' do
     fill_in 'Password', with: 'ABC123'
     fill_in 'Password confirmation', with: 'ABC123'
     click_on 'Sign up'
-    expect(page).to have_content('Hello, test@test.com')
-    expect(page).to have_content('Calendars')
+    expect(page).to have_content('Site Administration')
   end
 end
