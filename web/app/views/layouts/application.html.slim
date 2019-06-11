@@ -1,0 +1,9 @@
+= render 'layouts/base' do
+  = render 'layouts/navigation'
+  .container.pt-3
+    - flash.each do |key, value|
+      = content_tag :div, value, class: flash_class(key)
+
+    .row.pt-4.justify-content-md-center
+      .col-md-auto
+        = yield
