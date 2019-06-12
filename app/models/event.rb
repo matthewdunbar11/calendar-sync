@@ -18,10 +18,6 @@ class Event < ApplicationRecord
       visible false
     end
 
-    configure :description do
-      visible false
-    end
-
     configure :start do
       strftime_format '%B %d, %Y %I:%M %p'
       datepicker_options do 
@@ -33,6 +29,12 @@ class Event < ApplicationRecord
       strftime_format '%B %d, %Y %I:%M %p'
       datepicker_options do 
         { showTodayButton: false, format: parser.to_momentjs }
+      end
+    end
+
+    list do
+      configure :description do
+        visible false
       end
     end
   end
