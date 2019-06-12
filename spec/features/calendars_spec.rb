@@ -16,6 +16,7 @@ RSpec.feature 'calendars' do
     event = FactoryBot.create(:event)
 
     visit present_calendar_path(event.calendar)
+    save_screenshot '1.png'
     expect(page).to have_selector('.fc')
     expect(page).not_to have_content('Home')
   end
