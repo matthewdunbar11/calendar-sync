@@ -1,16 +1,5 @@
-@import '//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic';
-@import '//cdn.rawgit.com/necolas/normalize.css/master/normalize.css';
-@import '//cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css';
-
+@import 'actiontext';
+@import 'bootstrap';
 @import "font-awesome-sprockets";
 @import "font-awesome";
-
-@import 'actiontext';
-
-@import './navigation.scss';
-@import './calendar.scss';
-@import './buttons.scss';
-@import './flash.scss';
-@import './typography.scss';
-
-@import './events.scss';
+@import 'rails_bootstrap_forms';

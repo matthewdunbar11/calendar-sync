@@ -1,14 +1,24 @@
-nav.navigation
-  .container
-    .logo.navigation__item
-      = link_to root_path do
-        h4 Calendar Sync
-      
-    .navigation__item= link_to 'Home', root_path
+nav.mb-1.navbar.navbar-expand-lg.navbar-dark.bg-primary
+  = link_to 'Calendar Sync', root_path, class: 'navbar-brand'
+  button.navbar-toggler aria-controls="mainMenu" aria-expanded="false" aria-label=("Toggle navigation") data-target="#mainMenu" data-toggle="collapse" type="button" 
+    span.navbar-toggler-icon
+  #mainMenu.collapse.navbar-collapse
+    ul.navbar-nav.mr-auto
+      / li.nav-item= link_to 'Home', root_path, class: 'nav-link text-white'
+      / li.nav-item= link_to 'FAQ', root_path, class: 'nav-link text-white'
+      / li.nav-item.dropdown
+      /   = link_to 'Features', root_path, id: 'mainMenuLink', class: 'nav-link dropdown-toggle text-white', aria_expanded: 'false', aria_haspopup: 'true', data: { toggle: 'dropdown' }
+      /   .dropdown-menu.dropdown-default aria-labelledby='mainMenuLink'
+      /     a.dropdown-item href="#"  Action
+      /     a.dropdown-item href="#"  Another action
+      /     a.dropdown-item href="#"  Something else here
     - if current_user
-      .navigation__item= link_to 'View My Calendars', calendars_path
-      .navigation__item.get-started= link_to "Hello, #{current_user.email}", calendars_path
+      ul.navbar-nav.ml-auto.nav-flex-icons
+        li.nav-item.dropdown
+          = link_to "Hello, #{current_user.email}", calendars_path, id: 'mainmenuLink', class: 'nav-link dropdown-toggle text-white', aria_expanded: 'false', aria_haspopup: 'true', data: { toggle: 'dropdown' }
+          .dropdown-menu.dropdown-menu-right.dropdown-default aria-labelledby="mainMenuLink" 
+            = link_to 'Admin', rails_admin_path, class: 'dropdown-item'
+            = link_to 'Log Out', destroy_user_session_path, method: :delete, class: 'dropdown-item'
     - else
-      .get-started
-        .navigation__item= link_to 'Sign Up', new_user_registration_path, class: 'button'
-        .navigation__item= link_to 'Log In', new_user_session_path, class: 'button button-outline'
+        = link_to 'Sign Up', new_user_registration_path, class: 'btn btn-success mr-2'
+        = link_to 'Log In', new_user_session_path, class: 'nav-link text-white' 

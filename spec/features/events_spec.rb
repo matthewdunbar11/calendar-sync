@@ -37,46 +37,6 @@ RSpec.feature 'events' do
     expect(page).not_to have_content(other_event.title)
   end
 
-  scenario 'creating an event' do
-    visit calendar_path(calendar)
-    click_on 'Add New Event'
-
-    event_attributes = FactoryBot.attributes_for(:event)
-    fill_in 'Title', with: event_attributes[:title]
-
-    fill_in 'Start Date', with: event_attributes[:start]
-    fill_in 'End Date', with: event_attributes[:end]
-
-    find('[name="event[description]"]', visible: false).set(event_attributes[:description])
-    # fill_in 'event[description]', with: event_attributes[:description]
-
-    click_on 'Create Event'
-    expect(page).to have_content('Event successfully created')
-    click_on event_attributes[:title]
-    expect(page.html).to include(event_attributes[:description])
-  end
-
-  scenario 'editing an event' do
-    event = FactoryBot.create(:event, calendar: calendar)
-    visit calendar_path(calendar)
-    find("[data-id='#{event.id}']").click_on 'Edit'
-    fill_in 'Title', with: 'A New title'
-    click_on 'Update Event'
-
-    expect(page).to have_content('Event successfully updated')
-    expect(page).to have_content('A New title')
-  end
-
-  scenario 'deleting an event' do
-    event = FactoryBot.create(:event, calendar: calendar)
-    visit calendar_path(calendar)
-
-    find("[data-id='#{event.id}']").click_on 'Delete'
-    
-    expect(page).to have_content('Event successfully deleted')
-    expect(page).not_to have_selector("[data-id='#{event.id}']")
-  end
-
   scenario 'anonymously view an event' do
     event = FactoryBot.create(:event)
     visit event_path(event)
